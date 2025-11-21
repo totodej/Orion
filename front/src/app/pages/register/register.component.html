@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+
+<main>
+    <a routerLink="/">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon>
+    </a>
+    <div class="register-container">
+        <h1>Inscription</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline">
+                <mat-label>Nom d'utilisateur</mat-label>
+                <input matInput id="name" formControlName="name" type="text" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Adresse e-mail</mat-label>
+                <input matInput id="email" formControlName="email" type="email" />
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput id="password" formControlName="password" type="password" />
+            </mat-form-field>
+        
+            <button mat-raised-button color="primary" type="submit">S'inscrire</button>
+        </form>
+    </div>
+</main>
