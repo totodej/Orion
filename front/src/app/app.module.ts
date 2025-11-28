@@ -10,13 +10,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { PostsListComponent } from './pages/posts-list/posts-list.component';
+import { TopicsListComponent } from './pages/topics-list/topics-list.component';
+import { MeComponent } from './pages/me/me.component';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, PostsListComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, PostsListComponent, TopicsListComponent, MeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,7 +31,7 @@ import { PostsListComponent } from './pages/posts-list/posts-list.component';
     HttpClientModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

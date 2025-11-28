@@ -1,5 +1,8 @@
 header {
     border-bottom: black 2px solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     
     img {
         width: 140px;

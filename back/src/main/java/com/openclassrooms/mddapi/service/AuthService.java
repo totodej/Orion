@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
@@ -58,6 +59,32 @@ public class AuthService {
 		String token = jwtUtil.generateToken(user);
 		
 		return token;
+	}
+	
+	public UserDto updateUser(Integer userId, String name, String email, String password) {
+		User user = userRepository.findById(userId)
+	            .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+		
+		if (name != null && !name.isEmpty()) {
+	        user.setName(name);
+	    }
+
+	    if (email != null && !email.isEmpty()) {
+	        user.setEmail(email);
+	    }
+
+	    if (password != null && !password.isEmpty()) {
+	        user.setPassword(passwordEncoder.encode(password));
+	    }
+
+	    userRepository.save(user);
+		
+		return new UserDto(
+	        user.getId(),
+	        user.getName(),
+	        user.getEmail(),
+	        user.getCreatedAt().toString()
+	    );
 	}
 	
 }

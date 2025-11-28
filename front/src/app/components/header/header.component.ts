@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class HeaderComponent implements OnInit {
 
   isLogged$: Observable<boolean>;
-  showLogoutButton = false;
+  showUserMenu = false;
 
   constructor(
     private authService: AuthService,
@@ -26,17 +26,16 @@ export class HeaderComponent implements OnInit {
       filter(event => event instanceof NavigationEnd),
       map(() => this.router.url)
     ).subscribe(url => {
-      this.showLogoutButton = !!localStorage.getItem('token') 
+      this.showUserMenu = !!localStorage.getItem('token') 
         && !['/login', '/register'].includes(url);
     });
 
     // Écoute les changements d'état de connexion
     this.isLogged$.subscribe(isLogged => {
       const currentUrl = this.router.url;
-      this.showLogoutButton = isLogged && !['/login', '/register'].includes(currentUrl);
+      this.showUserMenu = isLogged && !['/login', '/register'].includes(currentUrl);
     });
   }
-
 
   logout(): void {
     this.authService.logout();

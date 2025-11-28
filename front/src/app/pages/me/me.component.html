@@ -1,0 +1,22 @@
+<app-header></app-header>
+<main>
+    <div class="me-container">
+        <h1>Profil utilisateur</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline">
+                <input matInput id="name" formControlName="name" type="text" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <input matInput id="email" formControlName="email" type="email" />
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+                <input matInput id="password" formControlName="password" type="password" />
+            </mat-form-field>
+        
+            <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
+        </form>
+    </div>
+    
+</main>

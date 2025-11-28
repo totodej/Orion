@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { LoginRequest } from '../models/loginRequest';
 import { RegisterRequest } from '../models/registerRequest';
+import { UpdateUserRequest } from '../models/updateUserRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,23 @@ export class AuthService {
 
   register(request: RegisterRequest): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/register`, request);
+  }
+
+  me(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/me`);
+  }
+
+  updateMe(request: UpdateUserRequest): Observable<User> {
+    return this.http.put<{token: string, user: User }>(
+      `${this.apiUrl}/me`,
+      request
+    ).pipe(
+      tap((response) => {
+        localStorage.setItem('token', response.token);
+      }),
+      // Extract only the user from the response
+      map(response => response.user)
+    );
   }
 
 }

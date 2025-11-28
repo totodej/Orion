@@ -1,4 +1,9 @@
 <header>
     <img src="/assets/logo_p6.png" alt="logo" />
-    <button mat-button *ngIf="showLogoutButton" color="warn" (click)="logout()">Se déconnecter</button>
+    <nav *ngIf="showUserMenu" class="buttons">
+        <button mat-button color="warn" (click)="logout()">Se déconnecter</button>
+        <a mat-button routerLink="/posts-list">Articles</a>
+        <a mat-button routerLink="/topics-list">Thèmes</a>
+        <a mat-button routerLink="/me">User</a>
+    </nav>
 </header>
