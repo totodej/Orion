@@ -1,0 +1,41 @@
+main {
+    padding: 2% 5%;
+
+    .topics-container {
+
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(344px, 1fr));
+        gap: 5px;
+
+        .topic {
+            width: 391px;
+            height: 161px;
+            background-color: #F5F5F5;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 10px;
+
+            .title-topic {
+                font-size: 16px;
+                font-weight: bold;
+                margin-bottom: 10px;;
+            }
+
+            .descrition-topic {
+                font-size: 14px;
+                width: 100px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            button {
+                width: 167px;
+                margin: 0 auto;
+            }
+        }
+    }
+
+}

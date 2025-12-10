@@ -1,6 +1,6 @@
 <app-header></app-header>
 <main>
-    <div class="me-container">
+    <section class="me-container">
         <h1>Profil utilisateur</h1>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline">
@@ -12,11 +12,24 @@
             </mat-form-field>
             
             <mat-form-field appearance="outline">
-                <input matInput id="password" formControlName="password" type="password" />
+                <input matInput id="password" formControlName="password" type="password" placeholder="Mot de passe" />
             </mat-form-field>
         
             <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
         </form>
-    </div>
+    </section>
+    <hr>
+    <section class="topics-container">
+        <h1>Abonnements</h1>
+        
+        <div class="topics-list">
+            <div class="topic" *ngFor="let topic of subscriptions">
+                <div class="title-topic">{{ topic.title }}</div>
+                <div class="description-topic">{{ topic.description.replaceAll("?", "'") }}</div>
+                <button mat-raised-button color="primary" (click)="unsubscribe(topic.id)">Se désabonner</button>
+            </div>
+        </div>
+
+    </section>
     
 </main>

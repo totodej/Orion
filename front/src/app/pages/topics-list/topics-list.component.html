@@ -1,0 +1,15 @@
+<app-header></app-header>
+<main>
+    <div class="topics-container">
+        <div class="topic" *ngFor="let topic of topics">
+            <div class="title-topic">{{topic.title}}</div>
+            <div class="description-topic">Description : {{topic.description.replaceAll("?", "'")}}</div>
+            <button mat-raised-button color="primary"
+                    [disabled]="isSubscribed(topic.id)"
+                    (click)="subscribe(topic.id)">
+                {{ isSubscribed(topic.id) ? 'Déjà abonné' : 'S\'abonner' }}
+            </button>
+        </div>
+    </div>
+
+</main>

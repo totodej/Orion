@@ -1,0 +1,51 @@
+package com.openclassrooms.mddapi.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="subscriptions")
+public class Subscription {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name= "user_id", nullable=false)
+	private User user;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name= "topic_id", nullable=false)
+	private Topic topic;
+	
+	public Subscription() {}
+	
+	public Subscription(User user, Topic topic) {
+		this.user = user;
+		this.topic = topic;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+
+}
