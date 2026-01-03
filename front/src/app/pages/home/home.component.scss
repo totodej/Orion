@@ -11,3 +11,22 @@
     gap: 80px;
   }
 }
+
+@media (max-width: 650px) {
+  img {
+    width: 400px;
+  }
+}
+
+@media (max-width: 400px) {
+  .center {
+    img {
+      width: 225px;
+    }
+  
+    .buttons {
+      gap: 25px;
+      flex-direction: column;
+    }
+  }
+}
