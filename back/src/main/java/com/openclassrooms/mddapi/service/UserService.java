@@ -1,9 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import java.time.format.DateTimeFormatter;
-
 import org.springframework.stereotype.Service;
-
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.model.User;

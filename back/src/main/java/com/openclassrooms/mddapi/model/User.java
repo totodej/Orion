@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.model;
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -74,6 +73,5 @@ public class User {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
-	
 	
 }

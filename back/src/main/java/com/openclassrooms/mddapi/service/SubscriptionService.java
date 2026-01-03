@@ -1,16 +1,13 @@
 package com.openclassrooms.mddapi.service;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.openclassrooms.mddapi.model.Subscription;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.SubscriptionRepository;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
-
 import jakarta.transaction.Transactional;
 
 @Service
