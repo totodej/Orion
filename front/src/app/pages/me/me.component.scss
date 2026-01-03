@@ -10,6 +10,19 @@ main {
       form {
         display: flex;
         flex-direction: column;
+        width: 200px;
+        gap: 5px;
+
+        .password-hint {
+          font-size: 10.5px;
+          color: red;
+          margin-top: -8px;
+
+          ul {
+            margin: 4px 0 0 16px;
+            padding: 0;
+          }
+        }
       }
     }
 
@@ -29,13 +42,13 @@ main {
 
         .topics-list {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(344px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(auto, 410px));
           gap: 5px;
           width: 100%;
+          justify-content: space-around;
 
           .topic {
-              width: 391px;
-              height: 161px;
+              min-height: 161px;
               background-color: #F5F5F5;
               border-radius: 8px;
               display: flex;
@@ -49,10 +62,9 @@ main {
                   margin-bottom: 10px;;
               }
   
-              .descrition-topic {
+              .description-topic {
                   font-size: 14px;
-                  width: 100px;
-                  white-space: nowrap;
+                  max-height: 60px;
                   overflow: hidden;
                   text-overflow: ellipsis;
               }
@@ -63,8 +75,5 @@ main {
               }
           }
         }
-        
-
     }
-    
 }
