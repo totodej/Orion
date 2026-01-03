@@ -2,7 +2,6 @@ package com.openclassrooms.mddapi.controller;
 
 import java.time.LocalDateTime;
 import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.openclassrooms.mddapi.dto.LoginRequestDto;
 import com.openclassrooms.mddapi.dto.LoginResponseDto;
 import com.openclassrooms.mddapi.dto.RegisterRequestDto;
@@ -52,7 +50,7 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginRequestDto request) {
 		try {
-			String token = authService.login(request.getEmail(), request.getPassword());
+			String token = authService.login(request.getIdentifier(), request.getPassword());
 			return ResponseEntity.ok(new LoginResponseDto(token));
 		} catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "error"));

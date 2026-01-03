@@ -2,10 +2,8 @@ package com.openclassrooms.mddapi.service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.model.User;
@@ -17,6 +15,8 @@ public class AuthService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final JwtUtil jwtUtil;
+	private static final String PASSWORD_REGEX =
+		    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{8,}$";
 	
 	public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
 		this.userRepository = userRepository;
@@ -33,6 +33,8 @@ public class AuthService {
 			throw new RuntimeException("Email is already in use");
 		}
 		
+		validatePassword(password);
+		
 		User user = new User();
 		user.setName(name);
 		user.setEmail(email);
@@ -46,8 +48,8 @@ public class AuthService {
 	 Authentifie un utilisateur avec email et mot de passe.
 	 Si les informations sont correctes, génère un JWT.
 	*/
-	public String login(String email, String password) {
-		Optional<User> optionalUser = userRepository.findByEmail(email);
+	public String login(String identifier, String password) {
+		Optional<User> optionalUser = userRepository.findByEmailOrName(identifier, identifier);
 		
 		User user = optionalUser
 				.orElseThrow(()-> new ResourceNotFoundException("User not found"));
@@ -85,6 +87,15 @@ public class AuthService {
 	        user.getEmail(),
 	        user.getCreatedAt().toString()
 	    );
+	}
+	
+	private void validatePassword(String password) {
+	    if (!password.matches(PASSWORD_REGEX)) {
+	        throw new IllegalArgumentException(
+	            "Le mot de passe doit contenir au moins 8 caractères, " +
+	            "une majuscule, une minuscule, un chiffre et un caractère spécial"
+	        );
+	    }
 	}
 	
 }
