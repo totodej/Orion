@@ -15,6 +15,9 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 	
+	/*
+	 Récupère un utilisateur par son ID et retourne un UserDto
+	 */
 	public UserDto getUserById(Integer id) {
 		
 		User user = userRepository.findById(id)

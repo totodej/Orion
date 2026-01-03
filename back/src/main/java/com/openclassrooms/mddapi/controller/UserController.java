@@ -17,6 +17,9 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	/*
+	 Récupère un utilisateur par son ID
+	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<UserDto> getUserById(@PathVariable Integer id) {
 		UserDto user = userService.getUserById(id);

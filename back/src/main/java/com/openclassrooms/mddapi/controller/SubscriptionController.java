@@ -27,6 +27,9 @@ public class SubscriptionController {
 		this.jwtUtil = jwtUtil;
 	}
 	
+	/*
+	 Abonne l'utilisateur authentifié à un topic donné
+	 */
 	@PostMapping("/{topicId}")
 	public ResponseEntity<?> subscribeToTopic(
 			@RequestHeader("Authorization") String authHeader, 
@@ -37,6 +40,9 @@ public class SubscriptionController {
 		return ResponseEntity.ok(Map.of("message", "Subscribed"));
 	}
 	
+	/*
+	 Désabonne l'utilisateur authentifié d'un topic donné
+	 */
 	@DeleteMapping("/{topicId}")
 	public ResponseEntity<?> unsubscribeFromTopic(
 			@RequestHeader("Authorization") String authHeader, 
@@ -47,6 +53,9 @@ public class SubscriptionController {
 		return ResponseEntity.ok(Map.of("message", "Unsubscribed"));
 	}
 	
+	/*
+	 Récupère tous les abonnements de l'utilisateur authentifié
+	 */
 	@GetMapping("")
 	public ResponseEntity<?> getMySubscriptions(
 			@RequestHeader("Authorization") String authHeader

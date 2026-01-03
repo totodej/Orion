@@ -26,10 +26,12 @@ public class SpringSecurityConfig {
 	}
 	
 	/*
-     Configuration des règles de sécurité HTTP.
+     Configure la sécurité HTTP :
      - Désactive CSRF, formLogin et httpBasic
-     - Permet certaines routes sans authentification
-     - Définit le filtrage JWT pour toutes les autres requêtes
+     - Permet les routes /login et /register sans authentification
+     - Toutes les autres requêtes nécessitent une authentification
+     - Applique le filtrage JWT pour toutes les requêtes
+     - Définit la session comme stateless
     */
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -56,13 +58,17 @@ public class SpringSecurityConfig {
 	}
 	
 	/*
-	 Bean pour encoder les mots de passe avec BCrypt.
+	 Bean pour encoder les mots de passe avec BCrypt
 	*/
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
+	
+	/*
+	 Configuration CORS pour autoriser les requêtes depuis le front-end Angular
+	 */
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();

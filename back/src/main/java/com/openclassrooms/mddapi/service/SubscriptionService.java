@@ -26,6 +26,9 @@ public class SubscriptionService {
 		this.topicRepository = topicRepository;
 	}
 	
+	/*
+	 Abonne un utilisateur à un topic si ce n'est pas déjà fait
+	 */
 	public void subscribe(Integer userId, Integer topicId) {
 		
 		if(subscriptionRepository.existsByUserIdAndTopicId(userId, topicId)) {
@@ -41,11 +44,17 @@ public class SubscriptionService {
 		subscriptionRepository.save(new Subscription(user, topic));
 	}
 	
+	/*
+	 Désabonne un utilisateur d'un topic
+	 */
 	@Transactional
 	public void unsubscribe(Integer userId, Integer topicId) {
 		subscriptionRepository.deleteByUserIdAndTopicId(userId, topicId);
 	}
 	
+	/*
+	 Récupère toutes les abonnements d'un utilisateur
+	 */
 	public List<Subscription> getSubscriptionsByUser(Integer userId) {
         return subscriptionRepository.findByUserId(userId);
     }

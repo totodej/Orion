@@ -17,6 +17,9 @@ public class TopicController {
 		this.topicService = topicService;
 	}
 	
+	/*
+	 Récupère tous les topics existants
+	 */
 	@GetMapping
 	public ResponseEntity<List<Topic>> getTopics() {
 		return ResponseEntity.ok(topicService.getAllTopics());

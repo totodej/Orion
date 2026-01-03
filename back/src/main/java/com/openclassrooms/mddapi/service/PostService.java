@@ -32,6 +32,9 @@ public class PostService {
 		this.subscriptionRepository = subscriptionRepository;
 	}
 	
+	/*
+	 Récupère les posts des topics auxquels un utilisateur est abonné, triés par date
+	 */
 	public List<Post> getPostsForUser(Integer userId, String sortDirection) {
 		List<Integer> topicIds = subscriptionRepository.findByUserId(userId)
                 .stream()
@@ -49,6 +52,9 @@ public class PostService {
 		return postRepository.findByTopicIdIn(topicIds, sort);
 	}
 	
+	/*
+	 Crée un nouveau post pour un utilisateur et un topic donnés 
+	 */
 	public Post createPost(CreatePostRequestDto req, Integer userId) {
 		LocalDateTime currentDate = LocalDateTime.now();
 		
@@ -68,12 +74,16 @@ public class PostService {
 		return postRepository.save(post);
 	}
 	
-	
+	/*
+	 Récupère tous les posts d'un topic donné
+	 */
 	public List<Post> getByTopic(Integer topicId) {
 		return postRepository.findByTopicId(topicId);
 	}
 	
-	
+	/*
+	 Récupère un post par son ID
+	 */
 	public Post getPostById(Integer id) {
 		return postRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Post not found"));

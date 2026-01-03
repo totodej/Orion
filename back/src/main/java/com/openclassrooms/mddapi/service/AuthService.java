@@ -25,8 +25,7 @@ public class AuthService {
 	}
 	
 	/*
-	 Enregistre un nouvel utilisateur dans la base de données.
-	 Vérifie que l'email n'est pas déjà utilisé et encode le mot de passe.
+	 Enregistre un nouvel utilisateur avec email unique et mot de passe encodé
 	*/
 	public User register(String name, String email, String password) {
 		if(userRepository.existsByEmail(email)) {
@@ -45,8 +44,7 @@ public class AuthService {
 	}
 	
 	/*
-	 Authentifie un utilisateur avec email et mot de passe.
-	 Si les informations sont correctes, génère un JWT.
+	 Authentifie un utilisateur et retourne un JWT si les infos sont correctes
 	*/
 	public String login(String identifier, String password) {
 		Optional<User> optionalUser = userRepository.findByEmailOrName(identifier, identifier);
@@ -63,6 +61,9 @@ public class AuthService {
 		return token;
 	}
 	
+	/*
+	 Met à jour les informations d'un utilisateur existant
+	 */
 	public UserDto updateUser(Integer userId, String name, String email, String password) {
 		User user = userRepository.findById(userId)
 	            .orElseThrow(() -> new ResourceNotFoundException("User not found"));
@@ -89,6 +90,9 @@ public class AuthService {
 	    );
 	}
 	
+	/*
+	 Vérifie que le mot de passe respecte les critères de sécurité 
+	 */
 	private void validatePassword(String password) {
 	    if (!password.matches(PASSWORD_REGEX)) {
 	        throw new IllegalArgumentException(

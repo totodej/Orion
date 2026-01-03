@@ -27,6 +27,9 @@ public class PostController {
 		this.jwtUtil = jwtUtil;
 	}
 	
+	/*
+	 Crée un nouveau post pour l'utilisateur authentifié
+	 */
 	@PostMapping("")
 	public ResponseEntity<?> createPost(
 			@RequestHeader("Authorization") String authHeader, 
@@ -39,6 +42,9 @@ public class PostController {
 		return ResponseEntity.ok(created);
 	}
 	
+	/*
+	 Récupère tous les posts des topics auxquels l'utilisateur est abonné, triés par date
+	 */
 	@GetMapping("")
 	public ResponseEntity<?> getPostsForMySubscriptions(
             @RequestHeader("Authorization") String authHeader,
@@ -51,6 +57,9 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 	
+	/*
+	 Récupère un post par son ID 
+	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Post> getPostById(@PathVariable Integer id) {
 		return ResponseEntity.ok(postService.getPostById(id));

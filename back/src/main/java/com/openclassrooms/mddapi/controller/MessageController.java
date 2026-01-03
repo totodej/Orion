@@ -25,6 +25,9 @@ public class MessageController {
 		this.jwtUtil = jwtUtil;
 	}
 	
+	/*
+	 Ajoute un nouveau message à un post pour l'utilisateur authentifié 
+	 */
 	@PostMapping
 	public ResponseEntity<?> addMessage(
 			@RequestHeader("Authorization") String authHeader,
@@ -40,6 +43,9 @@ public class MessageController {
 		return ResponseEntity.ok(saved);
 	}
 	
+	/*
+	 Récupère tous les messages d'un post
+	 */
 	@GetMapping
 	public ResponseEntity<List<Message>> getMessages(@PathVariable Integer postId) {
 		return ResponseEntity.ok(messageService.getMessageByPost(postId));

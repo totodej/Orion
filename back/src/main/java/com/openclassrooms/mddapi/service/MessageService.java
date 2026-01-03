@@ -23,6 +23,9 @@ public class MessageService {
 		this.postRepository = postRepository;
 	}
 	
+	/*
+	 Crée un nouveau message pour un utilisateur et un post donnés
+	 */
 	public Message createMessage(Integer userId, Integer postId, String content) {
 		LocalDateTime date = LocalDateTime.now();
 		
@@ -41,6 +44,9 @@ public class MessageService {
 		return messageRepository.save(message);
 	}
 	
+	/*
+	 Récupère tous les messages d'un post triés par date croissante
+	 */
 	public List<Message> getMessageByPost(Integer postId) {
 		return messageRepository.findByPostIdOrderByCreatedAtAsc(postId);
 	}

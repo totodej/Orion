@@ -26,8 +26,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	}
 	
 	/*
-	 Filtre qui intercepte toutes les requêtes HTTP pour vérifier la présence
-	 d'un token JWT dans l'en-tête Authorization.
+	 Intercepte chaque requête HTTP pour vérifier la présence d'un token JWT
+	 dans l'en-tête Authorization et authentifie l'utilisateur si le token est valide.
 	*/
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)

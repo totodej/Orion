@@ -39,7 +39,7 @@ public class JwtUtil {
     }
 	
     /*
-     Extrait les claims d'un token JWT valide.
+     Extrait les claims (informations) d'un token JWT valide.
     */
 	public Claims extractClaims(String token) {
        return Jwts.parser()
@@ -60,6 +60,9 @@ public class JwtUtil {
        }
 	}
 	
+	/*
+	 Extrait l'ID de l'utilisateur à partir d'un token JWT
+	 */
 	public Integer extractUserId(String token) {
 	    Claims claims = extractClaims(token);
 	    return claims.get("userId", Integer.class);
