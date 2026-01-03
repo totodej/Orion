@@ -1,9 +1,39 @@
-<header>
-    <img src="/assets/logo_p6.png" alt="logo" />
+<header *ngIf="!isMobile || showUserMenu">
+  <img src="/assets/logo_p6.png" alt="logo" />
+  <div class="desktop-only">
     <nav *ngIf="showUserMenu" class="buttons">
-        <button mat-button color="warn" (click)="logout()">Se déconnecter</button>
-        <a mat-button routerLink="/posts-list">Articles</a>
-        <a mat-button routerLink="/topics-list">Thèmes</a>
-        <a mat-button routerLink="/me">User</a>
+      <button mat-button color="warn" (click)="logout()">Se déconnecter</button>
+      <a mat-button routerLink="/posts-list">Articles</a>
+      <a mat-button routerLink="/topics-list">Thèmes</a>
+      <a mat-button routerLink="/me"
+        ><mat-icon
+          aria-hidden="false"
+          aria-label="Example home icon"
+          fontIcon="account_circle"
+        ></mat-icon
+      ></a>
     </nav>
+  </div>
+
+  <div class="mobile-only" *ngIf="showUserMenu">
+    <button class="burger" (click)="toggleMenu()">☰</button>
+    <div *ngIf="menuOpen">
+      <nav class="buttons-container">
+        <div class="buttons-list">
+          <button mat-button color="warn" (click)="logout()">
+            Se déconnecter
+          </button>
+          <a mat-button routerLink="/posts-list">Articles</a>
+          <a mat-button routerLink="/topics-list">Thèmes</a>
+        </div>
+        <a class="user-link" mat-button routerLink="/me"
+          ><mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="account_circle"
+          ></mat-icon
+        ></a>
+      </nav>
+    </div>
+  </div>
 </header>
