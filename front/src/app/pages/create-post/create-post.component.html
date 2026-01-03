@@ -1,0 +1,59 @@
+<app-header></app-header>
+<main>
+  <div class="create-container">
+    <h1>Créer un nouvel article</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-select
+          id="topic"
+          formControlName="topic"
+          appearance="outline"
+          placeholder="Sélectionner un thème"
+        >
+          <mat-option *ngFor="let topic of topics" value="{{ topic.id }}">{{
+            topic.title
+          }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('topic')?.hasError('required')">
+          Le thème est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          id="title"
+          formControlName="title"
+          type="text"
+          placeholder="Titre de l'article"
+        />
+        <mat-error *ngIf="form.get('title')?.hasError('required')">
+          Le titre est obligatoire
+        </mat-error>
+
+        <mat-error *ngIf="form.get('title')?.hasError('minlength')">
+          Le titre doit contenir au moins 3 caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <textarea
+          matInput
+          id="description"
+          formControlName="description"
+          type="text"
+          placeholder="Contenu de l'article"
+        ></textarea>
+        <mat-error *ngIf="form.get('description')?.hasError('required')">
+          Le contenu est obligatoire
+        </mat-error>
+
+        <mat-error *ngIf="form.get('description')?.hasError('minlength')">
+          Le contenu doit contenir au moins 10 caractères
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Créer</button>
+    </form>
+  </div>
+</main>
