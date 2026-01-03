@@ -1,0 +1,49 @@
+<app-header></app-header>
+<main>
+  <div class="post-container">
+    <a routerLink="/posts-list">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example home icon"
+        fontIcon="arrow_back"
+      ></mat-icon>
+    </a>
+    <section class="post">
+      <h1>{{ post?.title }}</h1>
+      <div class="infos-post">
+        <div class="date-post">{{ post?.createdAt | date : "dd/MM/yyyy" }}</div>
+        <div class="user-post">{{ post?.user?.name }}</div>
+        <div class="topic-post">{{ post?.topic?.title }}</div>
+      </div>
+      <div class="description-post">Content : {{ post?.description }}</div>
+    </section>
+  </div>
+  <hr />
+  <section class="messages-container">
+    <h2>Commentaires</h2>
+    <div class="messages">
+      <div *ngFor="let msg of messages" class="message-container">
+        <div class="message-user">{{ msg.user!.name }}</div>
+        <p class="message-content">{{ msg.message }}</p>
+      </div>
+      <div class="comment-container">
+        <mat-form-field appearance="outline" class="comment-field">
+          <textarea
+            class="comment-input"
+            matInput
+            [(ngModel)]="newMessage"
+            placeholder="Écrire un commentaire..."
+            rows="3"
+          ></textarea>
+        </mat-form-field>
+        <button (click)="sendMessage()">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="send"
+          ></mat-icon>
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
