@@ -1,4 +1,22 @@
 <app-header></app-header>
 <main>
-    
+  <div class="buttons-container">
+    <button mat-raised-button color="primary" routerLink="/create-post">
+      Créer un article
+    </button>
+    <button mat-button (click)="toggleSort()">
+      Trier par
+      <mat-icon>
+        {{ sortDirection === "asc" ? "arrow_downward" : "arrow_upward" }}
+      </mat-icon>
+    </button>
+  </div>
+  <div class="posts-list">
+    <div class="post" *ngFor="let post of posts">
+      <div class="title-post" (click)="openPost(post.id)">{{ post.title }}</div>
+      <div>{{ post.createdAt | date : "dd/MM/yyyy" }}</div>
+      <div>{{ post.user.name }}</div>
+      <div class="description-post">Content : {{ post.description }}</div>
+    </div>
+  </div>
 </main>
