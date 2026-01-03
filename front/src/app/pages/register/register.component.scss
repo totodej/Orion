@@ -1,5 +1,11 @@
 main {
     padding: 2% 5%;
+
+    img {
+      width: 225px;
+      display: none;
+      margin: auto;
+    }
     
     .register-container {
       display: flex;
@@ -10,7 +16,27 @@ main {
       form {
         display: flex;
         flex-direction: column;
+        width: 200px;
+        gap: 5px;
+
+        .password-hint {
+          font-size: 10.5px;
+          color: red;
+          margin-top: -8px;
+
+          ul {
+            margin: 4px 0 0 16px;
+            padding: 0;
+          }
+        }
       }
     }
-    
+}
+
+@media (max-width: 425px) {
+  main {
+    img {
+      display: block;
+    }
+  }  
 }

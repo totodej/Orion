@@ -1,23 +1,50 @@
 <app-header></app-header>
 
 <main>
-    <a routerLink="/">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon>
-    </a>
-    <div class="login-container">
-        <h1>Se connecter</h1>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="outline">
-                <mat-label>Adresse e-mail</mat-label>
-                <input matInput id="email" formControlName="email" type="email" />
-            </mat-form-field>
+  <a routerLink="/">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="arrow_back"
+    ></mat-icon>
+  </a>
+  <img src="/assets/logo_p6.png" alt="logo" />
+  <div class="login-container">
+    <h1>Se connecter</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail ou Nom d'utilisateur</mat-label>
+        <input
+          matInput
+          id="identifier"
+          formControlName="identifier"
+          type="text"
+        />
+        <mat-error *ngIf="form.get('identifier')?.hasError('required')">
+          Champ requis
+        </mat-error>
+      </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Mot de passe</mat-label>
-                <input matInput id="password" formControlName="password" type="password" />
-            </mat-form-field>
-        
-            <button mat-raised-button color="primary" type="submit">Se connecter</button>
-        </form>
-    </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input
+          matInput
+          id="password"
+          formControlName="password"
+          type="password"
+        />
+
+        <mat-error *ngIf="form.get('password')?.hasError('required')">
+          Champ requis
+        </mat-error>
+      </mat-form-field>
+      <div class="login-error" *ngIf="loginError">
+        {{ loginError }}
+      </div>
+
+      <button mat-raised-button color="primary" type="submit">
+        Se connecter
+      </button>
+    </form>
+  </div>
 </main>

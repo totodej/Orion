@@ -1,6 +1,11 @@
-
 main {
     padding: 2% 5%;
+
+    img {
+      width: 225px;
+      display: none;
+      margin: auto;
+    }
     
     .login-container {
       display: flex;
@@ -11,7 +16,22 @@ main {
       form {
         display: flex;
         flex-direction: column;
+        width: 200px;
+        gap: 5px;
+
+        .login-error {
+          color: red;
+          font-size: 10.5px;
+          margin-top: -8px;
+        }
       }
     }
-    
+}
+
+@media (max-width: 425px) {
+  main {
+    img {
+      display: block;
+    }
+  }  
 }

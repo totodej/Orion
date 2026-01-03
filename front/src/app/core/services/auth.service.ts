@@ -7,15 +7,17 @@ import { RegisterRequest } from '../models/registerRequest';
 import { UpdateUserRequest } from '../models/updateUserRequest';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3001/api/auth';
 
-  private isLoggedSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
+  private isLoggedSubject = new BehaviorSubject<boolean>(
+    !!localStorage.getItem('token')
+  );
   public isLogged$ = this.isLoggedSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public login(request: LoginRequest): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/login`, request).pipe(
@@ -40,16 +42,14 @@ export class AuthService {
   }
 
   updateMe(request: UpdateUserRequest): Observable<User> {
-    return this.http.put<{token: string, user: User }>(
-      `${this.apiUrl}/me`,
-      request
-    ).pipe(
-      tap((response) => {
-        localStorage.setItem('token', response.token);
-      }),
-      // Extract only the user from the response
-      map(response => response.user)
-    );
+    return this.http
+      .put<{ token: string; user: User }>(`${this.apiUrl}/me`, request)
+      .pipe(
+        tap((response) => {
+          localStorage.setItem('token', response.token);
+        }),
+        // Extract only the user from the response
+        map((response) => response.user)
+      );
   }
-
 }

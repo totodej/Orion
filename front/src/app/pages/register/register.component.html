@@ -1,29 +1,66 @@
 <app-header></app-header>
 
-
 <main>
-    <a routerLink="/">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon>
-    </a>
-    <div class="register-container">
-        <h1>Inscription</h1>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="outline">
-                <mat-label>Nom d'utilisateur</mat-label>
-                <input matInput id="name" formControlName="name" type="text" />
-            </mat-form-field>
+  <a routerLink="/">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="arrow_back"
+    ></mat-icon>
+  </a>
+  <img src="/assets/logo_p6.png" alt="logo" />
+  <div class="register-container">
+    <h1>Inscription</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Nom d'utilisateur</mat-label>
+        <input matInput id="name" formControlName="name" type="text" />
+        <mat-error *ngIf="form.get('name')?.hasError('required')">
+          Champ requis
+        </mat-error>
+      </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Adresse e-mail</mat-label>
-                <input matInput id="email" formControlName="email" type="email" />
-            </mat-form-field>
-            
-            <mat-form-field appearance="outline">
-                <mat-label>Mot de passe</mat-label>
-                <input matInput id="password" formControlName="password" type="password" />
-            </mat-form-field>
-        
-            <button mat-raised-button color="primary" type="submit">S'inscrire</button>
-        </form>
-    </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Adresse e-mail</mat-label>
+        <input matInput id="email" formControlName="email" type="email" />
+        <mat-error *ngIf="form.get('email')?.hasError('email')">
+          Email invalide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input
+          matInput
+          id="password"
+          formControlName="password"
+          type="password"
+        />
+        <mat-error *ngIf="form.get('password')?.hasError('required')">
+          Mot de passe requis
+        </mat-error>
+      </mat-form-field>
+
+      <div
+        class="password-hint"
+        *ngIf="
+          form.get('password')?.hasError('strongPassword') &&
+          form.get('password')?.touched
+        "
+      >
+        Le mot de passe doit contenir :
+        <ul>
+          <li>8 caractères minimum</li>
+          <li>1 majuscule</li>
+          <li>1 minuscule</li>
+          <li>1 chiffre</li>
+          <li>1 caractère spécial</li>
+        </ul>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit">
+        S'inscrire
+      </button>
+    </form>
+  </div>
 </main>
