@@ -1,25 +1,74 @@
-# P6-Full-Stack-reseau-dev
+#  Monde de Dev (MDD)
 
-## Front
+Application full-stack de réseau social pour développeurs, permettant de publier des articles, s'abonner à des thèmes et commenter des publications.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+---
 
-Don't forget to install your node_modules before starting (`npm install`).
+## 1. Installer la base de données
 
-### Development server
+Créer la base `mdd` dans MySQL :
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```sql
+CREATE DATABASE mdd;
+```
 
-### Build
+Configurer le fichier `application.properties` dans `back/src/main/resources` :
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/mdd?useSSL=false&serverTimezone=UTC
+spring.datasource.username=VOTRE_UTILISATEUR
+spring.datasource.password=VOTRE_MOT_DE_PASSE
+spring.jpa.hibernate.ddl-auto=update
+```
 
-### Where to start
+---
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+## 2.  Installer l’application
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+### Back-end (Java Spring Boot)
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get rid of it.
+```bash
+cd back
+mvn install
+```
 
-Good luck!
+### Front-end (Angular)
+
+```bash
+cd front
+npm install
+```
+
+---
+
+## 3. ▶ Lancer l’application
+
+### Lancer le back-end
+
+```bash
+cd back
+mvn spring-boot:run
+```
+
+API disponible sur :  
+ http://localhost:3001/api
+
+### Lancer le front-end
+
+```bash
+cd front
+ng serve
+```
+
+Application accessible sur :  
+ http://localhost:4200
+
+---
+
+
+##  Technologies utilisées
+
+- Java 11 + Spring Boot  
+- Spring Security + JWT  
+- MySQL  
+- Angular 14+  
